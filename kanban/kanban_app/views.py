@@ -1,6 +1,19 @@
 from rest_framework import generics
-from kanban_app.models import KanbanCard
-from kanban_app.serializers import KanbanCardSerializer
+from kanban_app.models import KanbanCard, Task
+from kanban_app.serializers import KanbanCardSerializer, TaskSerializer
+
+"""
+CREATE: POST /tasks
+"""
+class TaskCollection(generics.CreateAPIView):
+    serializer_class = TaskSerializer
+
+"""
+Retrieve: GET /tasks/<id>
+"""
+class TaskRecord(generics.RetrieveAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
 
 """
 Create : POST /cards
