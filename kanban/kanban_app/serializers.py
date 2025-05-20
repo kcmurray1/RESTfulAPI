@@ -15,5 +15,5 @@ class KanbanCardSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = KanbanCard
-        fields = '__all__'
+        fields = ["id", "title", "description", "status", "tasks"]
 

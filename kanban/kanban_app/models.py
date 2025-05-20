@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class KanbanCard(models.Model):
     STATUS_CHOICES = (
@@ -11,8 +11,14 @@ class KanbanCard(models.Model):
     description = models.CharField(max_length=1000, blank=True)
     status = models.IntegerField(choices=STATUS_CHOICES, default=0)
 
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="cards"
+    )
+
     def __str__(self):
-        return f"{self.id} {self.title} {self.description}, {self.get_status_display()}"
+        return f"{self.id} {self.title} {self.description}, {self.get_status_display()} owned by {self.owner}"
 
 
 class Task(models.Model):
